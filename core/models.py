@@ -31,7 +31,7 @@ class Sale(models.Model):
         return f"{self.quantity} x {self.product.name} by {self.cashier.username}"
     
 
- class SaleItem(models.Model):
+class SaleItem(models.Model):
     # Links this specific item to a single receipt/sale
     sale = models.ForeignKey(Sale, related_name='items', on_delete=models.CASCADE) [cite: 11]
     
