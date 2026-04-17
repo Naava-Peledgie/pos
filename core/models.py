@@ -29,3 +29,26 @@ class Sale(models.Model):
 
     def __str__(self):
         return f"{self.quantity} x {self.product.name} by {self.cashier.username}"
+    
+
+ class SaleItem(models.Model):
+    # Links this specific item to a single receipt/sale
+    sale = models.ForeignKey(Sale, related_name='items', on_delete=models.CASCADE) [cite: 11]
+    
+    # Links to the product being bought
+    product = models.ForeignKey(Product, on_delete=models.CASCADE) [cite: 9, 11]
+    
+    # How many of this product are being purchased
+    quantity = models.PositiveIntegerField(default=1) [cite: 11]
+    
+    # Stores the price at the exact moment of purchase
+    # This prevents old receipts from changing if you update product prices later
+    price_at_sale = models.DecimalField(max_digits=10, decimal_places=2) [cite: 9]
+
+    def __str__(self):
+        return f"{self.product.name} (x{self.quantity})"
+
+    @property
+    def get_total(self):
+        # Helper method to calculate the total price for this specific line item
+        return self.price_at_sale * self.quantity   

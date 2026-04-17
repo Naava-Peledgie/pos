@@ -4,3 +4,4 @@ from .models import Product, Customer, Sale, SaleItem
 admin.site.register(Product)
 admin.site.register(Customer)
 admin.site.register(Sale)
+admin.site.register(SaleItem)
