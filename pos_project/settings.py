@@ -115,4 +115,14 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
+# Static files (CSS, JavaScript, Images)
 STATIC_URL = 'static/'
+
+# This tells Django to look for the 'static' folders inside your apps (like 'core')
+STATICFILES_DIRS = [
+    BASE_DIR / "core" / "static",
+]
+
+# Redirect settings for the login system you built in Phase 3
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/login/'
