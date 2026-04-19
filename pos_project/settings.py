@@ -126,3 +126,6 @@ STATICFILES_DIRS = [
 # Redirect settings for the login system you built in Phase 3
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/login/'
+
+LOGIN_URL = 'login'
+LOGIN_REDIRECT_URL = 'dashboard'
