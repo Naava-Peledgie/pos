@@ -1,53 +1,133 @@
-{% load static %} 
+]{% extends 'core/base.html' %}
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 <link rel="stylesheet" href="{% static 'core/css/bootstrap.min.css' %}">
-<div class="container mt-4">
-<div class="container mt-4">
-    <div class="row mb-4">
-        <div class="col-md-4">
-            <div class="card bg-primary text-white shadow-sm border-0">
-                <div class="card-body">
-                    <h6 class="text-uppercase small">Total Inventory Items</h6>
-                    <h2 class="display-4 fw-bold">{{ product_count }}</h2>
-                </div>
+
+<style>
+    .pos-container { text-align: center; padding: 40px; background-color: #f8f9fa; min-height: 100vh; }
+    .welcome-text { font-weight: 300; color: #555; margin-bottom: 50px; font-size: 1.5rem; }
+    
+    .module-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+        gap: 30px;
+        max-width: 1100px;
+        margin: 0 auto 50px auto;
+    }
+
+    .module-item {
+        text-decoration: none;
+        color: #337ab7;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        transition: transform 0.2s;
+    }
+
+    .module-item:hover { transform: scale(1.1); color: #23527c; text-decoration: none; }
+
+    .icon-circle {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 12px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+
+    .icon-circle i { font-size: 40px; color: white; }
+
+    /* OSPOS Matching Colors */
+    .bg-customers { background-color: #f39c12; } /* Orange */
+    .bg-items     { background-color: #e74c3c; } /* Red */
+    .bg-sales     { background-color: #3498db; } /* Blue */
+    .bg-reports   { background-color: #1abc9c; } /* Teal */
+    .bg-config    { background-color: #2ecc71; } /* Green */
+    .bg-office    { background-color: #34495e; } /* Navy */
+
+    .stat-badge { font-size: 0.8rem; margin-top: 5px; }
+</style>
+
+<div class="pos-container">
+    <h2 class="welcome-text">Welcome to <strong>MAC Supermarket</strong>, click a module below to get started.</h2>
+    
+    <div class="module-grid">
+        <a href="/admin/core/customer/" class="module-item">
+            <div class="icon-circle bg-customers">
+                <i class="fas fa-users"></i>
             </div>
-        </div>
+            <span>Customers</span>
+        </a>
+
+        <a href="/admin/core/product/" class="module-item">
+            <div class="icon-circle bg-items">
+                <i class="fas fa-tag"></i>
+            </div>
+            <span>Items</span>
+            <span class="badge bg-secondary stat-badge">{{ product_count }} Total</span>
+        </a>
+
+        <a href="/admin/core/sale/" class="module-item">
+            <div class="icon-circle bg-sales">
+                <i class="fas fa-shopping-cart"></i>
+            </div>
+            <span>Sales</span>
+        </a>
+
+        <a href="#" class="module-item">
+            <div class="icon-circle bg-reports">
+                <i class="fas fa-chart-line"></i>
+            </div>
+            <span>Reports</span>
+        </a>
+
+        <a href="/admin/" class="module-item">
+            <div class="icon-circle bg-office">
+                <i class="fas fa-building"></i>
+            </div>
+            <span>Office</span>
+        </a>
+
+        <a href="/admin/settings/" class="module-item">
+            <div class="icon-circle bg-config">
+                <i class="fas fa-cogs"></i>
+            </div>
+            <span>Configuration</span>
+        </a>
     </div>
 
-    <div class="card shadow-sm border-0">
+    {% if products %}
+    <div class="card shadow-sm border-0 text-start mx-auto" style="max-width: 900px;">
         <div class="card-header bg-white py-3">
-            <h5 class="mb-0 fw-bold">Current Stock</h5>
+            <h5 class="mb-0 fw-bold"><i class="fas fa-exclamation-triangle text-warning me-2"></i>Inventory Alerts</h5>
         </div>
         <div class="card-body">
             <table class="table table-hover">
                 <thead class="table-light">
                     <tr>
-                        <th>Product Name</th>
+                        <th>Product</th>
                         <th>Category</th>
-                        <th>Price</th>
-                        <th>Stock</th>
+                        <th>Stock Status</th>
                     </tr>
                 </thead>
                 <tbody>
                     {% for product in products %}
-                    <tr>
-                        <td>{{ product.name }}</td>
-                        <td>{{ product.category }}</td>
-                        <td>UGX {{ product.price }}</td>
-                        <td>
-                            {% if product.stock_quantity < 5 %}
-                                <span class="badge bg-danger">Low: {{ product.stock_quantity }}</span>
-                            {% else %}
-                                <span class="badge bg-success">{{ product.stock_quantity }}</span>
-                            {% endif %}
-                        </td>
-                    </tr>
-                    {% empty %}
-                    <tr>
-                        <td colspan="4" class="text-center text-muted">No products found. Add some in the Admin!</td>
-                    </tr>
+                        {% if product.stock_quantity < 5 %}
+                        <tr>
+                            <td>{{ product.name }}</td>
+                            <td>{{ product.category }}</td>
+                            <td><span class="badge bg-danger">Low Stock: {{ product.stock_quantity }}</span></td>
+                        </tr>
+                        {% endif %}
                     {% endfor %}
                 </tbody>
             </table>
         </div>
     </div>
+    {% endif %}
 </div>
+{% endblock %}
