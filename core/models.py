@@ -50,3 +50,8 @@ class SaleItem(models.Model):
     @property
     def get_total(self):
         return self.price_at_sale * self.quantity
+    
+    class Product(models.Model):
+    name = models.CharField(max_length=200)
+    barcode = models.CharField(max_length=50, unique=True, blank=True, null=True) # Add this
+    # ... keep your other fields (price, stock, etc.)
