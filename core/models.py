@@ -1,4 +1,4 @@
-]from django.db import models
+from django.db import models
 
 # 1. Product Model
 class Product(models.Model):
