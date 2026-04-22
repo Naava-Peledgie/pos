@@ -6,52 +6,75 @@
 <link rel="stylesheet" href="{% static 'core/css/bootstrap.min.css' %}">
 
 <style>
-    .pos-container { text-align: center; padding: 40px; background-color: #f8f9fa; min-height: 100vh; }
-    .welcome-text { font-weight: 300; color: #555; margin-bottom: 50px; font-size: 1.5rem; }
+    /* Main Layout */
+    .pos-container { 
+        text-align: center; 
+        padding: 40px; 
+        background-color: #ffffff; /* Clean white for luxury feel */
+        min-height: 100vh; 
+    }
     
+    .welcome-text { 
+        font-weight: 300; 
+        color: #1a1a1a; 
+        margin-bottom: 50px; 
+        font-size: 1.5rem; 
+        letter-spacing: 1px; 
+    }
+    
+    /* More compact grid */
     .module-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-        gap: 30px;
-        max-width: 1100px;
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+        gap: 20px;
+        max-width: 850px;
         margin: 0 auto 50px auto;
     }
 
     .module-item {
         text-decoration: none;
-        color: #337ab7;
+        color: #1a1a1a;
         display: flex;
         flex-direction: column;
         align-items: center;
-        transition: transform 0.2s;
+        transition: transform 0.2s ease-in-out;
     }
 
-    .module-item:hover { transform: scale(1.1); color: #23527c; text-decoration: none; }
+    .module-item:hover { 
+        transform: scale(1.05); 
+        color: #000; 
+        text-decoration: none; 
+    }
 
+    /* REDUCED ICON SIZES: Changed from 100px to 65px */
     .icon-circle {
-        width: 100px;
-        height: 100px;
+        width: 65px;
+        height: 65px;
         border-radius: 50%;
         display: flex;
         align-items: center;
         justify-content: center;
-        margin-bottom: 12px;
-        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        margin-bottom: 10px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.06);
     }
 
-    .icon-circle i { font-size: 40px; color: white; }
+    /* REDUCED ICON FONT: Changed from 40px to 22px */
+    .icon-circle i { 
+        font-size: 22px; 
+        color: white; 
+    }
 
-    /* OSPOS Matching Colors */
-    .bg-customers { background-color: #f39c12; } /* Orange */
-    .bg-items     { background-color: #e74c3c; } /* Red */
-    .bg-sales     { background-color: #3498db; } /* Blue */
-    .bg-reports   { background-color: #1abc9c; } /* Teal */
-    .bg-config    { background-color: #2ecc71; } /* Green */
-    .bg-office    { background-color: #34495e; } /* Navy */
+    /* INTENT Brand Colors */
+    .bg-customers { background-color: #2c2c2c; } /* Slate Black */
+    .bg-items     { background-color: #800020; } /* Burgundy */
+    .bg-sales     { background-color: #556b2f; } /* Dark Olive */
+    .bg-reports   { background-color: #4a4a4a; } /* Slate Grey */
+    .bg-config    { background-color: #b8860b; } /* Dark Gold */
+    .bg-office    { background-color: #000000; } /* Black */
 
-    .stat-badge { font-size: 0.8rem; margin-top: 5px; }
+    .stat-badge { font-size: 0.7rem; margin-top: 5px; color: #777; }
 </style>
-
+ 
 <div class="pos-container">
     <h2 class="welcome-text">Welcome to <strong>INTENT</strong>, click a module below to get started.</h2>
     
